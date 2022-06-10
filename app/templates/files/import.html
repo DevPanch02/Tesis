@@ -1,0 +1,127 @@
+{% extends 'startpage/home.html' %}
+{% load static %}
+
+{% block content %}
+
+<h3>Importar excel <i class="fas fa-file-import" ></i> </h3>
+
+    {% if messages %}
+
+        {% for message in messages %}
+
+            <div class="alert alert-{{message.tags}} " role="alert">
+
+                <p {% if messsage.tags %} class=" {% endif %} " > {{message}} </p>
+
+            </div>
+
+        {% endfor %}
+
+    {% endif %}
+
+
+    <!-- TABLE -->
+    
+        <div class="row">
+            <div class="d-flex justify-content-center">
+
+                <form method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+
+                    <!-- <div class="d-flex justify-content-start">
+                        <input type="file" name="myfile" class="btn btn-outline-success btn-sm" >
+                    </div> -->
+                        
+                    <div class="container" style="margin:10px ;">
+                        <div class="d-flex justify-content-center">
+                            <input type="file" name="myfile" class="btn btn-outline-success btn-sm" >
+                            <button type="submit" class="btn btn-block btn-success btn-sm " style="margin:0 0 0 50px ;"> <i class="fas fa-file-import" ></i> Generar datos</button>
+                            
+                        </div>
+                    </div>
+                    
+                        
+
+                </form>
+            </div>
+        </div>
+
+        <div class="d-flex justify-content-between">
+
+
+                <div class="p-2">
+                    <a href=" {% url 'adjudicacion' %} " class="btn btn-outline-success">ADJUDICACION PUBLICA PERSONAL</a>
+                </div>
+
+            
+            <div class="p-2">
+                
+                <a href=" {% url 'interes' %} " class="btn btn-outline-success">INTERES TRIBUTARIO</a>
+
+            </div>
+            <div class="p-2">
+                <a href=" {% url 'patente' %} " class="btn btn-outline-success">PATENTE ANUAL</a>
+
+            </div>
+            <div class="p-2">
+                <a href=" {% url 'adm_patente' %} " class="btn btn-outline-success">SER.ADM.PATENTE</a>
+
+            </div>
+            <div class="p-2">
+                <a href=" {% url 'tercera_edad' %} " class="btn btn-outline-success">TERCERA EDAD</a>
+
+            </div>
+        </div>
+
+
+      <hr>
+
+      <div class="card">
+        <h3> {{title}} </h3>
+    
+        <table class="table table-bordered" id="data">
+            
+            <thead>
+                
+    
+                <tr class="table-success" >
+                    <th scope="col">RUC</th>
+                    <th scope="col">Nombre comercial</th>
+                    <th scope="col">Nombre representate</th>
+                    <th scope="col">Apellido representate</th>
+                    <th scope="col">Tipico Negocio</th>
+                    <th scope="col">Descripcion</th>
+                    <th scope="col">Valor a pagar</th>
+                    <th scope="col">Peticiones</th>
+                    <th scope="col">Notificar</th>
+                
+                </tr>
+            </thead>
+            <tbody>
+    
+                {% for i in persons %}
+    
+                <tr>
+                    <td> {{i.RUC}} </td>
+                    <td> {{i.nombrecomercial}} </td>
+                    <td> {{i.nombrerepresentante}} </td>
+                    <td> {{i.apellidorepresentante}} </td>
+                    <td> {{i.negociotipo}} </td>
+                    <td> {{i.describenegocio}} </td>
+                    <td> {{i.valorpagar}} </td>
+                    <td> {{i.peticiones}} </td>
+    
+                    <td class=" d-flex justify-content-center" >
+                        <button type="button" class="btn btn-ms btn-danger  ">Notificar</button>
+
+                    </td>
+                </tr>
+    
+            {% endfor %}
+            </tbody>
+        </table>
+    
+    </div>
+
+
+{% endblock %}
