@@ -1,7 +1,9 @@
 from multiprocessing import context
+from django.http import HttpResponse
 from django.shortcuts import render
 from django.contrib import messages
 from django.views.generic import ListView, TemplateView
+from requests import Response
 from .resources import PersonResource
 from tablib import Dataset
 
@@ -14,7 +16,13 @@ from .forms import *
 class TemplateListPersons(TemplateView):
     template_name="datatable/table.html"
 
-    
+
+    def get_context_data(self, **kwargs):
+        context=super().get_context_data(**kwargs)
+        context['title']='Listado de usuarios'
+        return context
+
+
 
 
 def home(request):
@@ -29,7 +37,7 @@ def import_files(request):
 
         if not (new_person.name.endswith('xls') or new_person.name.endswith('xlsx')):
             messages.info(request,'FORMATO INCORRECTO')
-            return render(request,'base.html')
+            return render(request,'index.html')
         
 
         imported_data=dataset.load(new_person.read(),format='xls')
@@ -76,7 +84,9 @@ def import_files(request):
 
     return render(request,'files/import.html')
 
+
 #   IMPORTED TIP OF DATA
+
 def filter_adjudicacion(request):
     listadoAdjudicacion=Person.objects.filter(rubro_pagado='ADJUDICACION DE ENTE PUBLICO A PERSONA NATURAL')
     return render(request,'files/import.html', {"persons":listadoAdjudicacion} )

@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 
 from pathlib import Path
+from datetime import timedelta
 import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -26,7 +27,7 @@ SECRET_KEY = 'django-insecure-1xe#^*%adzitg@9^q!p)r-1%_e*hora*o$8n*(rpo#kfroi7us
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 
 
 
@@ -42,14 +43,31 @@ INSTALLED_APPS = [
     #aplicaciones
     'core.startpage',
     'core.login',
-    
+    'core.users',
+    'core.report',
+    'core.page',
 
 
 
     #INSTALED
     'import_export',
     'widget_tweaks',
+    # rest_framework
+    'rest_framework',
+    'django_rest_passwordreset',
+    'rest_framework.authtoken',
+    'rest_framework_simplejwt',
+    'rest_framework_simplejwt.token_blacklist',
+    # cors
+    'corsheaders',
 ]
+
+# simplejwt
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    )
+}
 
 DATA_UPLOAD_MAX_MEMORY_SIZE = 487465
 
@@ -59,6 +77,8 @@ DATA_UPLOAD_MAX_NUMBER_FIELDS=10000000
 
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
+
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -97,7 +117,7 @@ WSGI_APPLICATION = 'app.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'NAME': BASE_DIR / 'db2.sqlite3',
     }
 }
 
@@ -124,20 +144,41 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/4.0/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'es-ec'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'America/Guayaquil'
 
 USE_I18N = True
 
 USE_TZ = True
 
+# CORS
+CORS_ALLOWED_ORIGINS = [
+    # "https://example.com",
+    # "https://sub.example.com",
+    "http://localhost:8000",
+    "http://192.168.1.6:8000"
+    # "http://127.0.0.1:9000",
+]
 
+CORS_ALLOWED_WHITELIST = [
+    "http://localhost:8000",
+    "http://192.168.1.6:8000"
+]
+
+SIMPLE_JWT = {
+    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=59),
+    'REFRESH_TOKEN_LIFETIME': timedelta(days=1),
+    'AUTH_HEADER_TYPES': ('Bearer','Token'),
+    'ROTATE_REFRESH_TOKENS': True,
+    'BLACKLIST_AFTER_ROTATITION':True,
+}
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
 STATIC_URL = 'static/'
 STATICFILES_DIRS = (os.path.join(BASE_DIR,'static'),)
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles/')
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
@@ -153,5 +194,5 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 
 MEDIA_URL='/media/'
 
-# AUTH_USER_MODEL = 'user.User'
+AUTH_USER_MODEL = 'users.User'
 

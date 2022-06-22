@@ -1,10 +1,9 @@
-{% extends 'startpage/home.html' %}
+{% extends 'startpage/body.html' %}
 
-{% block content %}
+{% block details %}
 
-<div class="content">
-  
-    <div class="row">
+<hr>
+<br>
       <div class="col-lg-6">
 
         <div class="card card-primary card-outline">
@@ -29,8 +28,10 @@
             <h5 class="card-title m-0"> <b>Descripcion</b> </h5>
           </div>
           <div class="card-body">
-            <h6 class="card-title">Special title treatment</h6>
+            {% for i in object_list %}
+            <h6 class="card-title"> {{i.description}} </h6>
 
+            {% endfor %}
             <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
             <a href="#" class="btn btn-primary">Go somewhere</a>
           </div>
@@ -39,10 +40,5 @@
       <!-- /.col-md-6 -->
 
     <!-- /.row -->
-  </div><!-- /.container-fluid -->
-</div>
-
-
-
 
 {% endblock %}

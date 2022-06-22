@@ -6,105 +6,39 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Panel adminsitrativo</title>
-  <!-- Google Font: Source Sans Pro -->
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
-  <!-- Font Awesome -->
-  <link rel="stylesheet" href=" {% static 'plugins/fontawesome-free/css/all.min.css' %} ">
-  <!-- Theme style -->
-  <link rel="stylesheet" href=" {% static 'lib/css/adminlte.min.css' %} ">
-
-  <link rel="stylesheet" href="{% static 'datatable/datatables-1.10.20/css/dataTables.bootstrap4.min.css' %}"/>
-    <link rel="stylesheet" href="{% static 'datatable/datatables-1.10.20/plugins/responsive-2.2.3/css/responsive.bootstrap4.min.css' %}"/>
-    
-
-
+  <link rel="stylesheet" href="{% static 'lib/bootstrap-4.6.0/css/bootstrap.min.css' %}"/>
+  <link rel="stylesheet" href="{% static 'lib/fontawesome-5.15.3/css/all.min.css' %}"/>
+  <link rel="stylesheet" href="{% static 'lib/jquery-ui-1.12.1/jquery-ui.css' %}"/>
+  <!--Javascript-->
+  <script src="{% static 'lib/bootstrap-4.6.0/js/jquery.min.js' %}"></script>
+  <script src="{% static 'lib/jquery-ui-1.12.1/jquery-ui.min.js' %}"></script>
+  <script src="{% static 'lib/bootstrap-4.6.0/js/popper.min.js' %}"></script>
+  <script src="{% static 'lib/bootstrap-4.6.0/js/bootstrap.min.js' %}"></script>
+  <script src="{% static 'lib/bootstrap-4.6.0/js/bootstrap.bundle.min.js' %}"></script>
+  <script src="{% static 'lib/adminlte-3.1.0/js/adminlte.min.js' %}"></script>
+  <!--Template-->
+  <link rel="stylesheet" href="{% static 'lib/adminlte-3.1.0/css/adminlte.css' %}"/>
+  <!--Styles-->
+  <link rel="stylesheet" href="{% static 'css/style.css' %}"/>
+  <!--Libs-->
+  <script src="{% static 'lib/bootstrap-daterangepicker-3.1/js/moment.js' %}"></script>
+  <script src="{% static 'lib/bootstrap-daterangepicker-3.1/js/moment-with-locales.js' %}"></script>
+  <script src="{% static 'lib/jquery-confirm-3.3.4/jquery-confirm.min.js' %}"></script>
+  <link rel="stylesheet" href="{% static 'lib/jquery-confirm-3.3.4/jquery-confirm.min.css' %}"/>
+  <script src="{% static 'lib/sweetalert2-11.0.16/sweetalert2.all.min.js' %}"></script>
+  <link rel="stylesheet" href="{% static 'lib/sweetalert2-11.0.16/sweetalert2.min.css' %}"/>
+  <script src="{% static 'lib/jquery-loading-overlay-2.1.7/loadingoverlay.min.js' %}"></script>
+  <script src="{% static 'js/functions.js' %}"></script>
+  {% block head %}{% endblock %}
 
 </head>
 <body class="hold-transition sidebar-mini layout-navbar-fixed">
-<!-- Site wrapper -->
-<div class="wrapper">
-  
-    {% include 'startpage/header.html' %}
+  {% block body %}
 
-  <!-- Main Sidebar Container -->
-  <aside class="main-sidebar sidebar-dark-primary elevation-4">
-    <!-- Brand Logo -->
-   
+  {% endblock %}
 
-    <!-- Sidebar -->
-    <div class="sidebar">
-      <!-- Sidebar user (optional) -->
-      <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-        <div class="image">
-          <img src="#" class="img-circle elevation-2" alt="User Image">
-        </div>
-        <div class="info">
-          <a href="#" class="d-block">{{ request.user }}</a>
-        </div>
-      </div>
+  <script src="{% static 'js/main.js' %}"></script>
 
-      <!-- SidebarSearch Form -->
-      <div class="form-inline">
-        <div class="input-group" data-widget="sidebar-search">
-          <input class="form-control form-control-sidebar" type="search" placeholder="Search" aria-label="Search">
-          <div class="input-group-append">
-            <button class="btn btn-sidebar">
-              <i class="fas fa-search fa-fw"></i>
-            </button>
-          </div>
-        </div>
-      </div>
-
-      <!-- Sidebar Menu -->
-      <nav class="mt-2">
-
-        {% include 'startpage/slider.html' %}
-         
-      </nav>
-      <!-- /.sidebar-menu -->
-    </div>
-    <!-- /.sidebar -->
-  </aside>
-
-
-  <div class="content-wrapper">
-
-    {% block content %}
-
-
-
-    {% endblock %}
-
-  </div>
-  <!-- /.content-wrapper -->
-
-  {% include 'startpage/footer.html' %}
-  
-  <!-- Control Sidebar -->
-  <aside class="control-sidebar control-sidebar-dark">
-    <!-- Control sidebar content goes here -->
-  </aside>
-  <!-- /.control-sidebar -->
-</div>
-<!-- ./wrapper -->
-
-<!-- jQuery -->
-<script src=" {% static 'plugins/jquery/jquery.min.js' %} "></script>
-<!-- Bootstrap 4 -->
-<script src=" {% static 'plugins/bootstrap/js/bootstrap.bundle.min.js' %} "></script>
-<!-- AdminLTE App -->
-<script src=" {% static 'lib/js/adminlte.min.js' %} "></script>
-
-<script src="{% static 'datatable/datatables-1.10.20/js/jquery.dataTables.js' %}"></script>
-    <script src="{% static 'datatable/datatables-1.10.20/js/dataTables.bootstrap4.min.js' %}"></script>
-    <script src="{% static 'datatable/datatables-1.10.20/plugins/responsive-2.2.3/js/dataTables.responsive.min.js' %}"></script>
-    <script src="{% static 'datatable/datatables-1.10.20/plugins/responsive-2.2.3/js/responsive.bootstrap4.min.js' %}"></script>
-    <script type="text/javascript" >
-       $('#data').DataTable({
-          responsive:true,
-          autoWidth:false
-       }); 
-       </script>
 </body>
 
 
