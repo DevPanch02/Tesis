@@ -1,7 +1,8 @@
 from django.urls import path, include
-from .views import *
-
+from .views import vista,ver_datos
 urlpatterns = [
-    path('report/', viewData, name='report'),
+    # path('users-report/', ReportView.as_view(), name='report'),
+    path('ver-report/', ver_datos, name='ver_datos'),
+    path('users-reportPDF/', vista, name='report_pdf'),
 
 ]

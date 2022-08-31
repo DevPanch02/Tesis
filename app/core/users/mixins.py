@@ -9,11 +9,13 @@ class IsSuperuserMixin(object):
     def dispatch(self, request, *args, **kwargs):
         if request.user.is_superuser:
             return super().dispatch(request, *args, **kwargs)
-        return redirect('index')
+        messages.error(request, 'No tiene permiso para ingresar a este módulo')
+        return redirect('home')
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['date_now'] = datetime.now()
+        
         return context
 
 

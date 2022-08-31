@@ -20,19 +20,33 @@ from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
 
+from django.conf.urls import handler404, handler500
+from core.startpage.views import Error404, Error500
+from rest_framework_simplejwt.views import (
+    TokenObtainPairView,
+    TokenRefreshView,
+)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+
     path('', include('core.login.urls'), name='login'),
     path('home/', include('core.startpage.urls'), name='home'),
     path('users/', include('core.users.urls'), name='user'),
     path('page/', include('core.page.urls'), name='page'),
     path('report/', include('core.report.urls'), name='report'),
 
-    #api
+
+    # api
     path('api/', include('api.urls'), name='api'),
 
-    
+    #   TOKEN API
+    path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
+    path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
+
+
 ]
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
+handler404=Error404.as_view()
+handler500=Error500.as_view()

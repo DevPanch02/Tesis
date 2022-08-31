@@ -3,11 +3,7 @@
 
     {% if messages %}
 
-        {% for message in messages %}
-
-            <div class="alert alert-{{message.tags}} " role="alert">   </div>
-
-        {% endfor %}
+            <div class="alert alert-{{messages.tags}} " role="alert">   </div>
 
     {% endif %}
 
@@ -22,50 +18,101 @@
             <div class="container" style="margin:10px ;">
                 <div class="d-flex justify-content-center">
                     <input type="file" name="myfile" class="btn btn-outline-success btn-sm" >
-                    <button type="submit" class="btn btn-block btn-success btn-sm " style="margin:0 0 0 50px ;"> <i class="fas fa-file-import" ></i> Generar datos</button>
+                    <button type="submit" class="btn btn-block btn-success btn-sm " onclick="saludo();" style="margin:0 0 0 50px ;"> <i class="fas fa-file-import" ></i> Generar datos</button>
 
                 </div>
             </div>
-            
-                
 
         </form>
     </div>
 </div>
 
+<script>
+
+    function saludo(){
+        let timerInterval
+        Swal.fire({
+        title: 'Importando archivo',
+        html: 'Espere <b></b> milisegundos.',
+        timer: 9000,
+        timerProgressBar: true,
+        didOpen: () => {
+            Swal.showLoading()
+            const b = Swal.getHtmlContainer().querySelector('b')
+            timerInterval = setInterval(() => {
+            b.textContent = Swal.getTimerLeft()
+            }, 100)
+        },
+        willClose: () => {
+            clearInterval(timerInterval)
+        }
+        }).then((result) => {
+        /* Read more about handling dismissals below */
+        if (result.dismiss === Swal.DismissReason.timer) {
+            console.log('I was closed by the timer')
+        }
+        })
+    }
 
 
-<!-- FIN IMPORTAR -->
 
-
-
-
-
+</script>
 {% block options %} 
 
     <div class="d-flex justify-content-between">
 
-        <div class="p-2">
-            <a href=" {% url 'adjudicacion' %} " class="btn btn-success">ADJUDICACION PUBLICA PERSONAL</a>
+        <div class="p-3">
+        
+            <a href=" {% url 'total_usuarios' %} " class="btn btn-warning"> 
+                <i class="fas fa-list-alt"></i>  TOTAL USUARIOS</a>
+    
         </div>
 
-    <div class="p-2">
-        
-        <a href=" {% url 'interes' %} " class="btn btn-success">INTERES TRIBUTARIO</a>
+        <div class="p-3">
+            <a href=" {% url 'deudores' %} " class="btn btn-success">
+                <i class="fas fa-people-carry"></i>  PERSONAS DEUDORAS</a>
+        </div>
 
-    </div>
-    <div class="p-2">
-        <a href=" {% url 'patente' %} " class="btn btn-success">PATENTE ANUAL</a>
+        <div class="p-3">
+            <a href=" {% url 'no_deudores' %} " class="btn btn-primary">
+                <i class="fas fa-people-carry"></i>  PERSONAS SIN DEUDAS</a>
+        </div>
 
-    </div>
-    <div class="p-2">
-        <a href=" {% url 'adm_patente' %} " class="btn btn-success">SER.ADM.PATENTE</a>
+        <div class="p-3">
+            
+            <a href=" # " class="btn btn-danger" onclick="mensaje();" >
+                <i class="fas fa-bell"></i>  NOTIFICACION GENERAL</a>
 
-    </div>
-    <div class="p-2">
-        <a href=" {% url 'tercera_edad' %} " class="btn btn-success">TERCERA EDAD</a>
+        </div>
 
-    </div>
+        <script>
+            function mensaje(){
+                let timerInterval
+                Swal.fire({
+                title: 'Enviando información a notificadores',
+                html: 'Espere <b></b> milisegundos.',
+                timer: 3000,
+                timerProgressBar: true,
+                didOpen: () => {
+                    Swal.showLoading()
+                    const b = Swal.getHtmlContainer().querySelector('b')
+                    timerInterval = setInterval(() => {
+                    b.textContent = Swal.getTimerLeft()
+                    }, 100)
+                },
+                willClose: () => {
+                    clearInterval(timerInterval)
+                }
+                }).then((result) => {
+                /* Read more about handling dismissals below */
+                if (result.dismiss === Swal.DismissReason.timer) {
+                    console.log('I was closed by the timer')
+                }
+                })
+            }
+        </script>
+
     </div>
 
 {% endblock %}
+

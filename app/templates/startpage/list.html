@@ -17,7 +17,7 @@
         <div class="card-header">
             <h3 class="card-title">
                 <i class="fas fa-search"></i>
-                {% block title %}  {% endblock %}
+                {{title}} | {{date_now}}
             </h3>
             <div class="card-tools">
                 <small>Su último acceso al sistema fue el {{ request.user.last_login }}</small>
@@ -45,6 +45,8 @@
                         <tbody>
                         <!--Rows-->
                         {% block rows %}{% endblock %}
+
+
                         </tbody>
                     </table>
                 {% endblock %}
@@ -57,7 +59,7 @@
                 <!--Block box footer buttons-->
                 {% block box_footer_buttons %}
                     {% if create_url %}
-                        <a href="{{ create_url }}" class="btn btn-primary btn-flat">
+                        <a href=" {{ create_url }} " class="btn btn-primary btn-flat">
                             <i class="fas fa-plus"></i> Nuevo Registro
                         </a>
                     {% endif %}

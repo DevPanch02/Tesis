@@ -1,22 +1,23 @@
 {% extends 'startpage/list.html' %}
 
 {% block title %} 
-    <h5>Importar excel <i class="fas fa-file-import" ></i> </h5>
+    <h5>{{title}} <i class="fas fa-file-import" ></i> </h5>
 {% endblock %}
 
 {% block options %} 
     {% include 'files/options_import.html' %}
 {% endblock %}
     {% block columns %}
-                    <th scope="col">RUC</th>
+                    <th scope="col">RUC </th>
                     <th scope="col">Nombre comercial</th>
-                    <th scope="col">Nombre representate</th>
-                    <th scope="col">Apellido representate</th>
-                    <th scope="col">Tipico Negocio</th>
-                    <th scope="col">Descripcion</th>
+                    <th scope="col">Nombre representante</th>
+                    <th scope="col">Apellido representante</th>
+                    <th scope="col">Tipo Negocio</th>
+                    <th scope="col">Descripción</th>
                     <th scope="col">Valor a pagar</th>
-                    <th scope="col">Peticiones</th>
-                    <th scope="col">Notificar</th>
+                    <th scope="col">Latitud</th>
+                    <th scope="col">Longitud</th>
+
     {% endblock %}
 
     {% block rows %} 
@@ -30,15 +31,32 @@
                     <td> {{i.negociotipo}} </td>
                     <td> {{i.describenegocio}} </td>
                     <td> {{i.valorpagar}} </td>
-                    <td> {{i.peticiones}} </td>
-    
-                    <td class=" d-flex justify-content-center" >
-                        <button type="button" class="btn btn-ms btn-danger  ">Notificar</button>
+                    <td> {{i.latitud}} </td>
+                    <td> {{i.longitud}} </td>
 
-                    </td>
+ 
                 </tr>
     
             {% endfor %}
 
     {% endblock %}
 
+    {% block script %}
+
+    <script>
+        {% if messages %}
+            var html = '<p>';
+            {% for message in messages %}
+                html += '{{ message }}<br>';
+            {% endfor %}
+            html += '</p>';
+            Swal.fire({
+                title: 'Correcto',
+                html: html,
+                icon: 'success'
+            });
+        {% endif %}
+
+    </script>
+
+    {% endblock %}

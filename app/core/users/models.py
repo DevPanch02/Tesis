@@ -2,7 +2,6 @@ import requests
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 from django.forms import model_to_dict
-
 from app.settings import MEDIA_URL, STATIC_URL
 from core.users.validators import *
 import uuid
@@ -10,10 +9,9 @@ from app import settings
 import os
 from crum import get_current_request
 
-
 class User(AbstractUser):
     image = models.ImageField(upload_to='users/%Y', null=True, blank=True)
-    dni = models.CharField(max_length=13, unique=True, verbose_name='Cédula o RUC',validators=[vcedula])
+    dni = models.CharField(max_length=10,  verbose_name='Cédula o RUC',validators=[vcedula])
     is_change_password = models.BooleanField(default=False)
     token = models.UUIDField(primary_key=False, editable=False, null=True, blank=True, default=uuid.uuid4, unique=True)
     

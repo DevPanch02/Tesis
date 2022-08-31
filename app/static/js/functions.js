@@ -84,26 +84,26 @@ function alert_sweetalert(type, title, message, callback, timer, html) {
     });
 }
 
-function message_error(message) {
-    var type = typeof (message) === "object";
-    if (typeof (message) === "object") {
-        var errors = '<ul style="list-style: square; text-align: left;">';
-        $.each(message, function (index, item) {
-            errors += '<li><b style="text-transform:capitalize;">' + index + "</b>.- " + item + '</li>';
-        });
-        errors += '</ul>';
-        message = errors;
-    }
-    if (type) {
-        alert_sweetalert('error', 'Error', "", function () {
+// function message_error(message) {
+//     var type = typeof (message) === "object";
+//     if (typeof (message) === "object") {
+//         var errors = '<ul style="list-style: square; text-align: left;">';
+//         $.each(message, function (index, item) {
+//             errors += '<li><b style="text-transform:capitalize;">' + index + "</b>.- " + item + '</li>';
+//         });
+//         errors += '</ul>';
+//         message = errors;
+//     }
+//     if (type) {
+//         alert_sweetalert('error', 'Error1', "", function () {
 
-        }, null, message);
-    } else {
-        alert_sweetalert('error', 'Error', message, function () {
+//         }, null, message);
+//     } else {
+//         alert_sweetalert('error', 'Error1', message, function () {
 
-        }, null, "");
-    }
-}
+//         }, null, "");
+//     }
+// }
 
 function submit_formdata_with_ajax_form(fv) {
     var form = fv.form;
@@ -236,7 +236,7 @@ function submit_formdata_with_ajax(title, content, url, parameters, callback) {
                         processData: false,
                         contentType: false,
                         success: function (request) {
-                            if (!request.hasOwnProperty('error')) {
+                            if (!request.hasOwnProperty('error1')) {
                                 callback(request);
                                 return false;
                             }

@@ -30,7 +30,6 @@ DEBUG = True
 ALLOWED_HOSTS = ["*"]
 
 
-
 # Application definition
 
 INSTALLED_APPS = [
@@ -40,7 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    #aplicaciones
+    # aplicaciones
     'core.startpage',
     'core.login',
     'core.users',
@@ -49,7 +48,8 @@ INSTALLED_APPS = [
 
 
 
-    #INSTALED
+
+    # INSTALED
     'import_export',
     'widget_tweaks',
     # rest_framework
@@ -73,7 +73,7 @@ DATA_UPLOAD_MAX_MEMORY_SIZE = 487465
 
 IMPORT_EXPORT_USE_TRANSACTIONS = True
 
-DATA_UPLOAD_MAX_NUMBER_FIELDS=10000000
+DATA_UPLOAD_MAX_NUMBER_FIELDS = 10000000
 
 
 MIDDLEWARE = [
@@ -116,8 +116,15 @@ WSGI_APPLICATION = 'app.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db2.sqlite3',
+        # 'ENGINE': 'django.db.backends.sqlite3',
+        # 'NAME': BASE_DIR / 'db.sqlite3',
+
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'notificaciones',
+        'USER': 'edison',
+        'PASSWORD': 'edison.25',
+        'HOST': 'localhost',
+        'PORT': '3306',
     }
 }
 
@@ -157,27 +164,27 @@ CORS_ALLOWED_ORIGINS = [
     # "https://example.com",
     # "https://sub.example.com",
     "http://localhost:8000",
-    "http://192.168.1.6:8000"
+    "http://192.168.1.7:8000"
     # "http://127.0.0.1:9000",
 ]
 
 CORS_ALLOWED_WHITELIST = [
     "http://localhost:8000",
-    "http://192.168.1.6:8000"
+    "http://192.168.1.7:8000"
 ]
 
 SIMPLE_JWT = {
     'ACCESS_TOKEN_LIFETIME': timedelta(minutes=59),
     'REFRESH_TOKEN_LIFETIME': timedelta(days=1),
-    'AUTH_HEADER_TYPES': ('Bearer','Token'),
+    'AUTH_HEADER_TYPES': ('Bearer', 'Token'),
     'ROTATE_REFRESH_TOKENS': True,
-    'BLACKLIST_AFTER_ROTATITION':True,
+    'BLACKLIST_AFTER_ROTATITION': True,
 }
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
 STATIC_URL = 'static/'
-STATICFILES_DIRS = (os.path.join(BASE_DIR,'static'),)
+STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles/')
 
 # Default primary key field type
@@ -186,13 +193,14 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles/')
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
-LOGIN_REDIRECT_URL='/home/'
+LOGIN_REDIRECT_URL = '/home/'
 
-LOGOUT_REDIRECT_URL='/login/'
+LOGOUT_REDIRECT_URL = '/login/'
+
+LOGIN_URL = '/'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 
-MEDIA_URL='/media/'
+MEDIA_URL = '/media/'
 
 AUTH_USER_MODEL = 'users.User'
-

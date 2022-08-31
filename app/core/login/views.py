@@ -1,7 +1,10 @@
 from email import message
+from multiprocessing import AuthenticationError
 from django.shortcuts import redirect, render
+from django.urls import reverse_lazy
 from django.contrib.auth import logout
-from django.views.generic import RedirectView
+from django.views.generic import RedirectView, FormView
+from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.views import LoginView
 
 
@@ -19,6 +22,7 @@ class LoginFormView(LoginView):
         context=super().get_context_data(**kwargs)
         context['title']="Iniciar Session"
         return context
+
 
 class LogoutRedirectView(RedirectView):
     pattern_name='login'

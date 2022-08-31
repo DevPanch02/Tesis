@@ -1,26 +1,20 @@
 from django.shortcuts import render
 from django.urls import reverse_lazy
+from django.db.models import Q
 from core.page.models import Page
-from core.page.forms import PageForm
 from django.views.generic import  CreateView, UpdateView,ListView
 from django.views.generic.base import TemplateView
 
-class TemplatePage(TemplateView):
-    template_name="home.html"
+def search(request):
+    q=request.GET.get('q') if request.GET.get('q') != None else ''
 
+    options=Page.objects.filter(
+        Q(inicio_name_icontrains=q)|
+        Q(importar_name_icontrains=q)|
+        Q(list_name_icontrains=q)|
+        Q(person_name_icontrains=q)
+    )
 
-class CreatePage(CreateView):
-    model=Page
-    template_name="create_page.html"
-    form_class=PageForm
-    success_url=reverse_lazy("home")
+    context={'options':options}
 
-    def get_context_data(self, **kwargs):
-        context=super().get_context_data(**kwargs)
-        context['title']="PAGINA INICIO"
-        return context
-
-
-class ListPage(ListView):
-    model=Page
-    template_name="index.html"
+    return render(request,'index.html', context)

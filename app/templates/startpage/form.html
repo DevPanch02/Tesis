@@ -15,6 +15,7 @@
 {% block content %}
     <form class="form" method="post" action="." enctype="multipart/form-data" id="frmForm"
           data-url="{{ list_url }}">
+          
         <div class="card {{ dshboard.card }}">
             <div class="card-header">
                 <h3 class="card-title">
@@ -46,10 +47,10 @@
                 <div class="card-footer">
 
                     {% block buttons %}
-                        <button type="submit" class="btn btn-primary btn-flat">
+                        <a href=" # " type="submit" class="btn btn-primary btn-flat">
                             <i class="fas fa-save" aria-hidden="true"></i> Guardar registro
-                        </button>
-                        <a href="{{ list_url }}" class="btn btn-danger btn-flat">
+                        </a>
+                        <a href=" {% url 'users:user_list' %} " class="btn btn-danger btn-flat">
                             <i class="fas fa-times"></i> Cancelar
                         </a>
                     {% endblock %}
@@ -59,3 +60,7 @@
         </div>
     </form>
 {% endblock %}
+
+
+
+
